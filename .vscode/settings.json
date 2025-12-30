@@ -1,0 +1,10 @@
+{
+	"explorer.compactFolders": false,
+	"explorer.autoReveal": true,
+	"editor.cursorBlinking": "expand",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit",
+    "source.sortMembers": "explicit"
+  }
+}
