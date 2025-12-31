@@ -1,0 +1,73 @@
+version: "3.9"
+
+services:
+
+  mariadb:
+    image: mariadb:10.11
+    container_name: appwrite-mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootsecret
+      MYSQL_DATABASE: appwrite
+      MYSQL_USER: appwrite
+      MYSQL_PASSWORD: supersecret
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - appwrite
+
+  redis:
+    image: redis:7-alpine
+    container_name: appwrite-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - appwrite
+
+  appwrite:
+    image: appwrite/appwrite:latest
+    container_name: appwrite
+    depends_on:
+      - mariadb
+      - redis
+    ports:
+      - "8756:80"
+    environment:
+      _APP_ENV: development
+      _APP_DOMAIN: localhost:8756
+      _APP_DOMAIN_API: localhost:8756
+      _APP_DOMAIN_CONSOLE: localhost:8756
+
+      _APP_DB_HOST: mariadb
+      _APP_DB_PORT: 3306
+      _APP_DB_SCHEMA: appwrite
+      _APP_DB_USER: appwrite
+      _APP_DB_PASS: supersecret
+
+      # Silencia warning PHP 8.3
+      PHP_OPCACHE_ENABLE: 1
+      PHP_DISPLAY_ERRORS: 0
+
+    volumes:
+      - uploads:/storage/uploads
+      - cache:/storage/cache
+      - config:/storage/config
+      - certificates:/storage/certificates
+      - functions:/storage/functions
+    restart: unless-stopped
+    networks:
+      - appwrite
+
+volumes:
+  db_data:
+  redis_data:
+  uploads:
+  cache:
+  config:
+  certificates:
+  functions:
+
+networks:
+  appwrite:
+    driver: bridge

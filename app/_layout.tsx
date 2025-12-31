@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useFonts } from 'expo-font'
 import { SplashScreen, Stack } from 'expo-router'
 import './global.css'
+import { GlobalProvier } from '@/lib'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -23,7 +24,11 @@ export default function RootLayout() {
 	if(!fontsLoaded && !error)
 		return null
 
-  return <Stack 
-		screenOptions={{ headerShown: false }}
-	/>;
+  return(
+		<GlobalProvier>
+			<Stack 
+				screenOptions={{ headerShown: false }}
+			/>			
+		</GlobalProvier>
+	)
 }

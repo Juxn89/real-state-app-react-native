@@ -50,6 +50,12 @@
 						"./assets/fonts/Rubik-Light.ttf"
 					]
 				}
+			],
+			[
+				"expo-web-browser",
+				{
+					"experimentalLauncherActivity": true
+				}
 			]
     ],
     "experiments": {
