@@ -68,9 +68,9 @@ export const logout = async () => {
 export const getCurrentUser = async () => {
 	try {
 		const response = await account.get()
-
+		
 		if(response.$id) {
-			const userAvatar = avatar.getInitials({ name: response.name })
+			const userAvatar = avatar.getInitials()
 			return { ...response, avatar: userAvatar.toString() }
 		}		
 	} catch (error) {

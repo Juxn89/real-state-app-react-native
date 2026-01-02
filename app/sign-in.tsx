@@ -1,3 +1,4 @@
+import { Redirect } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
@@ -5,18 +6,9 @@ import { login, logout } from '@/lib'
 import icons from '@/constants/icons'
 import images from '@/constants/images'
 import { useGlobalContext } from '@/lib/global-provider'
-import { Redirect } from 'expo-router'
-import { useEffect } from 'react'
 
 export const SignIn = () => {
 	const { refetch, loading, isLogged } = useGlobalContext()
-
-	useEffect(() => {
-		(async() => {
-			if(!loading && isLogged)
-				await logout()
-		})()
-	}, [])
 
 	if(!loading && isLogged) 
 		return <Redirect href='/' />
@@ -54,17 +46,6 @@ export const SignIn = () => {
 						<View className='flex flex-row items-center justify-center'>
 							<Image className='w-5 h-5' resizeMode='contain' source={icons.google} />
 							<Text className='text-lg font-rubik-medium text-black-300 ml-2'>Continue with Google</Text>
-						</View>
-					</TouchableOpacity>
-
-					
-					<TouchableOpacity
-						className='bg-white shadow-md shadow-zinc-300 rounded-full w-full py-4 mt-5'
-						onPress={ handleLogout }
-					>
-						<View className='flex flex-row items-center justify-center'>
-							<Image className='w-5 h-5' resizeMode='contain' source={icons.google} />
-							<Text className='text-lg font-rubik-medium text-black-300 ml-2'>Logout</Text>
 						</View>
 					</TouchableOpacity>
 				</View>
