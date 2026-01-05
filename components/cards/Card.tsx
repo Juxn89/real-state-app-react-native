@@ -1,12 +1,14 @@
-import icons from "@/constants/icons"
-import images from "@/constants/images"
-import { Image, Text, TouchableOpacity, View } from "react-native"
+import icons from '@/constants/icons'
+import images from '@/constants/images'
+import { Models } from 'react-native-appwrite'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 
 interface Props {
+	item: Models.Document
 	onPress?: () => void
 }
 
-export const Card = ({ onPress }: Props) => {
+export const Card = ({ onPress, item: { rating, name, address, price, image } }: Props) => {
 	return (
 		<TouchableOpacity 
 			onPress={ onPress }
@@ -14,17 +16,17 @@ export const Card = ({ onPress }: Props) => {
 		>
 			<View className='flex flex-row items-center absolute px-2 top-5 right-5 bg-white/90 p-1 rounded-full z-50'>
 				<Image source={icons.star} className='size-2.5'/>
-				<Text className='text-xs font-rubik-bold text-primary-300 ml-0.5'>4.4</Text>
+				<Text className='text-xs font-rubik-bold text-primary-300 ml-0.5'>{ rating }</Text>
 			</View>
 
-			<Image source={ images.newYork } className="w-full h-40 rounded-lg" />
+			<Image source={{ uri: image }} className="w-full h-40 rounded-lg" />
 
 			<View className='flex flex-col mt-2'>
-				<Text className='text-base font-rubik-bold text-black-300'>Cozy Studio</Text>
-				<Text className='text-xs font-rubik text-black-100'>22 W 15th St, New York, NY 10011</Text>
+				<Text className='text-base font-rubik-bold text-black-300'>{ name }</Text>
+				<Text className='text-xs font-rubik text-black-100'>{ address }</Text>
 				
 				<View className='flex flex-row items-center justify-between mt-2'>
-					<Text className='text-base font-rubik-bold text-primary-300'>$2,500</Text>
+					<Text className='text-base font-rubik-bold text-primary-300'>${ price }</Text>
 					<Image source={ icons.heart } className='w-5 h-5 mr-2' tintColor={'#191d31'} />
 				</View>
 			</View>

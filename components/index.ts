@@ -6,3 +6,5 @@ export { Card } from './cards/Card'
 export { FeaturedCard } from './cards/FeaturedCard'
 
 export { Filters } from './filters/Filters'
+
+export { NoResult } from './no-results/NoResult'

@@ -1,7 +1,7 @@
-import { categories } from "@/constants/data"
-import { router, useLocalSearchParams } from "expo-router"
-import { useState } from "react"
-import { ScrollView, Text, TouchableOpacity } from "react-native"
+import { useState } from 'react'
+import { router, useLocalSearchParams } from 'expo-router'
+import { ScrollView, Text, TouchableOpacity } from 'react-native'
+import { categories } from '@/constants/data'
 
 export const Filters = () => {
 	const params = useLocalSearchParams<{filters?: string}>()
