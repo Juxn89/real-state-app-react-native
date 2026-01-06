@@ -134,3 +134,17 @@ export const getProperties = async ({ filter, query, limit }: { filter: string, 
 		return []
 	}
 }
+
+export async function getPropertyById({ id }: { id: string }) {
+  try {
+    const result = await database.getRow({
+      databaseId: config.databaseId!,
+      tableId: config.propertiesCollectionId!,
+      rowId: id
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
